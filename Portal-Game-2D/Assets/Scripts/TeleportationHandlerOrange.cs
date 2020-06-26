@@ -6,7 +6,7 @@ public class TeleportationHandlerOrange : MonoBehaviour
 {
     private GameObject bluePortal;
 
-    public bool isInProgress = false;
+    public bool flag = true;
 
     // Start is called before the first frame update
     void Start()
@@ -20,22 +20,18 @@ public class TeleportationHandlerOrange : MonoBehaviour
 
     }
 
-    Vector2 vect;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        isInProgress = true;
-
-        if ( !(bluePortal.GetComponent<TeleportationHandlerBlue>().isInProgress) )
+        if ( flag )
         {
-            vect = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
-
+            bluePortal.GetComponent<TeleportationHandlerBlue>().flag = false;
             collision.gameObject.transform.position = bluePortal.transform.position;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        bluePortal.GetComponent<TeleportationHandlerBlue>().isInProgress = false;
+        flag = true;
     }
 
 }
