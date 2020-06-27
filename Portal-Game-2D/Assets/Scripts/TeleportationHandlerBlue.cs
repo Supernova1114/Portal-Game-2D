@@ -12,7 +12,7 @@ public class TeleportationHandlerBlue : MonoBehaviour
     void Start()
     {
         orangePortal = GameObject.FindGameObjectWithTag("orangePortal");
-        GameObject.Find("Companion Cube").GetComponent<Rigidbody2D>().velocity = new Vector2( 3, 10 );
+        //GameObject.Find("Companion Cube").GetComponent<Rigidbody2D>().velocity = new Vector2( 3, 10 );
     }
 
     // Update is called once per frame

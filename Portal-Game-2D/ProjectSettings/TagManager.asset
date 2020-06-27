@@ -6,6 +6,7 @@ TagManager:
   tags:
   - bluePortal
   - orangePortal
+  - wall
   layers:
   - Default
   - TransparentFX
