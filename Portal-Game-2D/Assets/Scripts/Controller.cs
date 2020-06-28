@@ -5,17 +5,19 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class Controller : MonoBehaviour
 {
-    float horz;
-    float vert;
+    private float horz;
+    private float vert;
+
     public float hForce;
     public float vForce;
-
     public float maxSpeed;
-    public float maxJump;
+    public float normVForce;
+
+    private bool onWall = false;
+    //private bool jump = false;
 
     public Rigidbody2D body;
 
-    private bool isTouchingWall = false;
     //float vert;
 
     // Start is called before the first frame update
@@ -24,44 +26,68 @@ public class Controller : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
         vert = Input.GetAxisRaw("Vertical");
         horz = Input.GetAxisRaw("Horizontal");
 
-
+    }
+    void FixedUpdate()
+    {
+        
         Move(horz, vert);
-        print(body.velocity);
+        //print("vel" body.velocity);
     }
 
+    float temp;
+    float velX;
     void Move(float h, float v)
     {
 
         //body.velocity = new Vector2( h*speed*Time.deltaTime, v*jumpNum*Time.deltaTime );
 
         /*if ( body.velocity.x < maxSpeed || body.velocity.x > -maxSpeed )*/
-        body.AddForce(new Vector2(h * hForce * Time.deltaTime, v * vForce * Time.deltaTime));
-
-        if ( body.velocity.magnitude > maxSpeed)
-        {
-            body.velocity = new Vector2(body.velocity.normalized.x*maxSpeed, body.velocity.normalized.y*maxSpeed);
-        }
+        body.AddForce(new Vector2(h * hForce * Time.deltaTime, 0));
 
         
 
-        /*if ( isTouchingWall)
+        if ( Mathf.Abs(body.velocity.x) > maxSpeed)
         {
-            if ( v < 0 )
-            body.AddForce(new Vector2( 0, (v*jumpNum)*Time.deltaTime ));
-        }*/
+            temp = body.velocity.x;
+
+            if ( temp < 0)
+            {
+                velX = -1;
+            }
+            else
+            {
+                velX = 1;
+            }
+
+            body.velocity = new Vector2( velX*maxSpeed, body.velocity.y );
+        }
+
+
+
+
+
+        if (onWall && v == 1)
+        {
+            body.AddForce(new Vector2(0, vForce*Time.deltaTime));
+        }
+
+        if (onWall)
+        {
+            body.AddForce(new Vector2(0, normVForce * Time.deltaTime));
+        }
+
     }
 
-    /*private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ( collision.gameObject.tag == "wall")
+        if (collision.gameObject.tag == "wall")
         {
-            isTouchingWall = true;
+            onWall = true;
         }
     }
 
@@ -69,7 +95,7 @@ public class Controller : MonoBehaviour
     {
         if (collision.gameObject.tag == "wall")
         {
-            isTouchingWall = false;
+            onWall = false;
         }
-    }*/
+    }
 }
