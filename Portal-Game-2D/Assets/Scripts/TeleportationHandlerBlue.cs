@@ -16,6 +16,7 @@ public class TeleportationHandlerBlue : MonoBehaviour
     void Start()
     {
         orangePortal = GameObject.FindGameObjectWithTag("orangePortal");
+        exitAngle = orangePortal.transform.rotation.eulerAngles.z;
         //exitAngle = transform.rotation.eulerAngles.z + 90;  //orangePortal.transform.rotation.eulerAngles.z + transform.rotation.eulerAngles.z;
         //print(exitAngle);
         //exitAngle = (Quaternion.Euler(0, 0, exitAngle)).z;
@@ -38,9 +39,10 @@ public class TeleportationHandlerBlue : MonoBehaviour
     {
         if ( flag ) 
         {
+            print("blue");
             orangePortal.GetComponent<TeleportationHandlerOrange>().flag = false;
 
-            //collision.gameObject.transform.position = orangePortal.transform.position;
+            collision.gameObject.transform.position = orangePortal.transform.position;
 
             vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
             /*
@@ -58,14 +60,31 @@ public class TeleportationHandlerBlue : MonoBehaviour
             //Quaternion uhh = Quaternion.Euler(0, 0, exitAngle);
 
             //Vector2 newDir = Quaternion.AngleAxis(exitAngle, Vector3.forward) * vel;
-            exitAngle = transform.rotation.eulerAngles.z + 90;
+            
+            //print(exitAngle);
+            Vector2 newDir;
 
-            Vector2 newDir = Quaternion.Euler(0, 0, exitAngle) * vel;
+            switch (exitAngle)
+            {
+                case 360:
+                    newDir = -vel;
+                    break;
+                case 90:
+                    newDir = -vel;
+                    break;
+                default:
+                    //print("def v");
+                    newDir = Quaternion.Euler(0, 0, exitAngle) * vel;
+                    break;
+            }
+
+            
+
 
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = newDir;
-
-            print(vel);
-            print(newDir);
+            //print("////////////////////");
+            //print(vel);
+            //print(newDir);
 
         }
         

@@ -15,6 +15,7 @@ public class TeleportationHandlerOrange : MonoBehaviour
     void Start()
     {
         bluePortal = GameObject.FindGameObjectWithTag("bluePortal");
+        exitAngle = bluePortal.transform.rotation.eulerAngles.z;
         //exitAngle = bluePortal.transform.rotation.eulerAngles.z + transform.rotation.eulerAngles.z;
         //exitAngle = exitAngle * Mathf.Deg2Rad;
     }
@@ -29,10 +30,12 @@ public class TeleportationHandlerOrange : MonoBehaviour
     {
         if ( flag )
         {
+            print("orange");
             bluePortal.GetComponent<TeleportationHandlerBlue>().flag = false;
             collision.gameObject.transform.position = bluePortal.transform.position;
 
-            vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+            //vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+            vel = new Vector2(-5, -10);
 
             /*float x1 = vel.x;
             float y1 = vel.y;
@@ -41,10 +44,30 @@ public class TeleportationHandlerOrange : MonoBehaviour
 
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(x2, y2);*/
 
-            Vector2 newDir = Quaternion.AngleAxis(exitAngle, Vector3.forward) * vel;
-            print(vel);
-            print(newDir);
+            //print(exitAngle);
+            Vector2 newDir;
+
+            switch (exitAngle)
+            {
+                case 360:
+                    newDir = -vel;
+                    break;
+                case 90:
+                    newDir = -vel;
+                    break;
+                default:
+                    newDir = Quaternion.Euler(0, 0, exitAngle) * vel;
+                    break;
+            }
+
+
+
+
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = newDir;
+
+            //print(vel);
+            //print(newDir);
+
 
         }
     }

@@ -71,7 +71,7 @@ public class Controller : MonoBehaviour
 
 
 
-        if (onWall && v == 1)
+        if (v == 1)
         {
             body.AddForce(new Vector2(0, vForce*Time.deltaTime));
         }
