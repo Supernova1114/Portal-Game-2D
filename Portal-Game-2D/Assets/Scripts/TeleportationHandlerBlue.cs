@@ -14,7 +14,7 @@ public class TeleportationHandlerBlue : MonoBehaviour
     Vector2 newVel;
 
 
-    void Start()
+    void Awake()
     {
         orangePortal = GameObject.FindGameObjectWithTag("orangePortal");
 
@@ -27,26 +27,29 @@ public class TeleportationHandlerBlue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (orangePortal.activeInHierarchy)
         {
-            if (flag)
+            if (collision.gameObject.tag == "Player")
             {
-                orangePortal.GetComponent<TeleportationHandlerOrange>().flag = false;
+                if (flag)
+                {
+                    orangePortal.GetComponent<TeleportationHandlerOrange>().flag = false;
 
-                //orangePortal.transform.parent.gameObject.GetComponent<Collider2D>().enabled = false;
-                //orangePortal.transform.parent.gameObject.GetComponent<Rigidbody2D>().simulated = false;
+                    //orangePortal.transform.parent.gameObject.GetComponent<Collider2D>().enabled = false;
+                    //orangePortal.transform.parent.gameObject.GetComponent<Rigidbody2D>().simulated = false;
 
-                collision.gameObject.transform.position = orangePortal.transform.position;
+                    collision.gameObject.transform.position = orangePortal.transform.position;
 
-                vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+                    vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
 
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity = newVel * vel.magnitude;
+                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = newVel * vel.magnitude;
 
-                //print("blue: " + vel.magnitude);
-                //print( newVel.magnitude );
-                //print( (newVel * vel.magnitude).magnitude );
+                    //print("blue: " + vel.magnitude);
+                    //print( newVel.magnitude );
+                    //print( (newVel * vel.magnitude).magnitude );
+                }
+
             }
-            
         }
     }
 

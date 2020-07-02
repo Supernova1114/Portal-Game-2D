@@ -8,6 +8,11 @@ public class PortalPlacer : MonoBehaviour
     public GameObject bluePortal;
     public GameObject orangePortal;
 
+    public float portalDecay;
+
+    private bool flagB = true;
+    private bool flagO = true;
+
     //public Rigidbody2D body;
 
     //RaycastHit2D cast;
@@ -17,7 +22,8 @@ public class PortalPlacer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        bluePortal.SetActive(false);
+        orangePortal.SetActive(false);
     }
 
     // Update is called once per frame
@@ -39,71 +45,84 @@ public class PortalPlacer : MonoBehaviour
 
     void PlaceBlue()
     {
-        if ( GameObject.FindWithTag("bluePortal") != null)
+        RaycastHit2D cast;
+        //print("placed");
+        mousePos = (Vector2)Pointer.mousePos;
+
+        //body.velocity = (mousePos - (Vector2)transform.position).normalized * 5;
+
+        cast = Physics2D.Raycast((Vector2)transform.position, (mousePos - (Vector2)transform.position).normalized);
+
+
+        if (cast.collider != null)
         {
+            bluePortal.SetActive(true);
 
-            RaycastHit2D cast;
-            //print("placed");
-            mousePos = (Vector2)Pointer.mousePos;
+            bluePortal.transform.parent = null;
 
-            //body.velocity = (mousePos - (Vector2)transform.position).normalized * 5;
+            bluePortal.transform.position = cast.point;
 
-            cast = Physics2D.Raycast((Vector2)transform.position, (mousePos - (Vector2)transform.position).normalized);
+            Vector2 bNormal = cast.normal;
 
+            float angle = Mathf.Atan2(bNormal.y, bNormal.x) * Mathf.Rad2Deg;
 
-            if (cast.collider != null)
-            {
-                bluePortal.transform.parent = null;
+            bluePortal.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
 
-                bluePortal.transform.position = cast.point;
+            bluePortal.transform.parent = cast.collider.gameObject.transform;
 
-                Vector2 bNormal = cast.normal;
+            if (flagB)
+            StartCoroutine(blueTime());
 
-                float angle = Mathf.Atan2(bNormal.y, bNormal.x) * Mathf.Rad2Deg;
-
-                bluePortal.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-
-                bluePortal.transform.parent = cast.collider.gameObject.transform;
-
-            }
-            
         }
     }
 
     void PlaceOrange()
     {
-        if (GameObject.FindWithTag("orangePortal") != null)
+        RaycastHit2D cast;
+        //print("placed");
+        mousePos = (Vector2)Pointer.mousePos;
+
+        //body.velocity = (mousePos - (Vector2)transform.position).normalized * 5;
+
+        cast = Physics2D.Raycast((Vector2)transform.position, (mousePos - (Vector2)transform.position).normalized);
+
+        if (cast.collider != null)
         {
+            orangePortal.SetActive(true);
 
-            RaycastHit2D cast;
-            //print("placed");
-            mousePos = (Vector2)Pointer.mousePos;
+            orangePortal.transform.parent = null;
 
-            //body.velocity = (mousePos - (Vector2)transform.position).normalized * 5;
+            orangePortal.transform.position = cast.point;
 
-            cast = Physics2D.Raycast((Vector2)transform.position, (mousePos - (Vector2)transform.position).normalized);
+            Vector2 bNormal = cast.normal;
 
+            float angle = Mathf.Atan2(bNormal.y, bNormal.x) * Mathf.Rad2Deg;
 
-            if (cast.collider != null)
-            {
-                orangePortal.transform.parent = null;
+            orangePortal.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
 
-                orangePortal.transform.position = cast.point;
+            orangePortal.transform.parent = cast.collider.gameObject.transform;
 
-                Vector2 bNormal = cast.normal;
-
-                float angle = Mathf.Atan2(bNormal.y, bNormal.x) * Mathf.Rad2Deg;
-
-                orangePortal.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-
-                orangePortal.transform.parent = cast.collider.gameObject.transform;
-
-            }
+            if (flagO)
+            StartCoroutine(orangeTime());
 
         }
     }
 
+    IEnumerator blueTime()
+    {
+        flagB = false;
+        yield return new WaitForSeconds(portalDecay);
+        bluePortal.SetActive(false);
+        flagB = true;
+    }
 
+    IEnumerator orangeTime()
+    {
+        flagO = false;
+        yield return new WaitForSeconds(portalDecay);
+        orangePortal.SetActive(false);
+        flagO = true;
+    }
 
 
 

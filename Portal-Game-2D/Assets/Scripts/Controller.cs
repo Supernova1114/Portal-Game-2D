@@ -76,6 +76,11 @@ public class Controller : MonoBehaviour
             body.AddForce(new Vector2(0, vForce*Time.deltaTime));
         }
 
+        if (v == -1)
+        {
+            body.AddForce(new Vector2(0, -vForce * Time.deltaTime));
+        }
+
         if (onWall)
         {
             body.AddForce(new Vector2(0, normVForce * Time.deltaTime));

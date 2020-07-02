@@ -14,7 +14,7 @@ public class TeleportationHandlerOrange : MonoBehaviour
     Vector2 newVel;
 
 
-    void Start()
+    void Awake()
     {
         bluePortal = GameObject.FindGameObjectWithTag("bluePortal");
 
@@ -27,26 +27,29 @@ public class TeleportationHandlerOrange : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (bluePortal.activeInHierarchy)
         {
-            if (flag)
+            if (collision.gameObject.tag == "Player")
             {
-                bluePortal.GetComponent<TeleportationHandlerBlue>().flag = false;
+                if (flag)
+                {
+                    bluePortal.GetComponent<TeleportationHandlerBlue>().flag = false;
 
-                //bluePortal.transform.parent.gameObject.GetComponent<Collider2D>().enabled = false;
-                //Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), bluePortal.transform.parent.gameObject.GetComponent<Collider2D>(), true);
-                //bluePortal.transform.parent.gameObject.GetComponent<Rigidbody2D>().simulated = false;
+                    //bluePortal.transform.parent.gameObject.GetComponent<Collider2D>().enabled = false;
+                    //Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), bluePortal.transform.parent.gameObject.GetComponent<Collider2D>(), true);
+                    //bluePortal.transform.parent.gameObject.GetComponent<Rigidbody2D>().simulated = false;
 
-                collision.gameObject.transform.position = bluePortal.transform.position;
+                    collision.gameObject.transform.position = bluePortal.transform.position;
 
-                vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+                    vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
 
-                collision.gameObject.GetComponent<Rigidbody2D>().velocity = newVel * vel.magnitude;
+                    collision.gameObject.GetComponent<Rigidbody2D>().velocity = newVel * vel.magnitude;
 
-                //print("orange: " + vel.magnitude);
-                //print(newVel.magnitude);
-                //print((newVel * vel.magnitude).magnitude);
+                    //print("orange: " + vel.magnitude);
+                    //print(newVel.magnitude);
+                    //print((newVel * vel.magnitude).magnitude);
 
+                }
             }
         }
     }

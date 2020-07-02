@@ -7,6 +7,7 @@ TagManager:
   - bluePortal
   - orangePortal
   - wall
+  - bad
   layers:
   - Default
   - TransparentFX
