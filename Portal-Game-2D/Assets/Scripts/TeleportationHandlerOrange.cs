@@ -27,28 +27,39 @@ public class TeleportationHandlerOrange : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (flag)
+        if (collision.gameObject.tag == "Player")
         {
-            bluePortal.GetComponent<TeleportationHandlerBlue>().flag = false;
+            if (flag)
+            {
+                bluePortal.GetComponent<TeleportationHandlerBlue>().flag = false;
 
-            collision.gameObject.transform.position = bluePortal.transform.position;
+                //bluePortal.transform.parent.gameObject.GetComponent<Collider2D>().enabled = false;
+                //Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), bluePortal.transform.parent.gameObject.GetComponent<Collider2D>(), true);
+                //bluePortal.transform.parent.gameObject.GetComponent<Rigidbody2D>().simulated = false;
 
-            vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+                collision.gameObject.transform.position = bluePortal.transform.position;
 
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = newVel * vel.magnitude;
+                vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
 
-            //print("orange: " + vel.magnitude);
-            //print(newVel.magnitude);
-            //print((newVel * vel.magnitude).magnitude);
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = newVel * vel.magnitude;
 
+                //print("orange: " + vel.magnitude);
+                //print(newVel.magnitude);
+                //print((newVel * vel.magnitude).magnitude);
+
+            }
         }
-
     }
 
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        flag = true;
+        if ( collision.gameObject.tag == "Player")
+        {
+            flag = true;
+            //transform.parent.gameObject.GetComponent<Collider2D>().enabled = true;
+            //transform.parent.gameObject.GetComponent<Rigidbody2D>().simulated = true;
+        }
     }
 
 }

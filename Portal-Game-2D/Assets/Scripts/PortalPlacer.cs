@@ -10,7 +10,7 @@ public class PortalPlacer : MonoBehaviour
 
     //public Rigidbody2D body;
 
-    RaycastHit2D cast;
+    //RaycastHit2D cast;
 
     Vector2 mousePos;
 
@@ -41,6 +41,8 @@ public class PortalPlacer : MonoBehaviour
     {
         if ( GameObject.FindWithTag("bluePortal") != null)
         {
+
+            RaycastHit2D cast;
             //print("placed");
             mousePos = (Vector2)Pointer.mousePos;
 
@@ -51,6 +53,8 @@ public class PortalPlacer : MonoBehaviour
 
             if (cast.collider != null)
             {
+                bluePortal.transform.parent = null;
+
                 bluePortal.transform.position = cast.point;
 
                 Vector2 bNormal = cast.normal;
@@ -58,6 +62,8 @@ public class PortalPlacer : MonoBehaviour
                 float angle = Mathf.Atan2(bNormal.y, bNormal.x) * Mathf.Rad2Deg;
 
                 bluePortal.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+
+                bluePortal.transform.parent = cast.collider.gameObject.transform;
 
             }
             
@@ -68,6 +74,8 @@ public class PortalPlacer : MonoBehaviour
     {
         if (GameObject.FindWithTag("orangePortal") != null)
         {
+
+            RaycastHit2D cast;
             //print("placed");
             mousePos = (Vector2)Pointer.mousePos;
 
@@ -78,6 +86,8 @@ public class PortalPlacer : MonoBehaviour
 
             if (cast.collider != null)
             {
+                orangePortal.transform.parent = null;
+
                 orangePortal.transform.position = cast.point;
 
                 Vector2 bNormal = cast.normal;
@@ -85,6 +95,8 @@ public class PortalPlacer : MonoBehaviour
                 float angle = Mathf.Atan2(bNormal.y, bNormal.x) * Mathf.Rad2Deg;
 
                 orangePortal.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+
+                orangePortal.transform.parent = cast.collider.gameObject.transform;
 
             }
 

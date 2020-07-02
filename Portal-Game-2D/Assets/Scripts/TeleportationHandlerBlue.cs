@@ -27,27 +27,38 @@ public class TeleportationHandlerBlue : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (flag)
+        if (collision.gameObject.tag == "Player")
         {
-            orangePortal.GetComponent<TeleportationHandlerOrange>().flag = false;
+            if (flag)
+            {
+                orangePortal.GetComponent<TeleportationHandlerOrange>().flag = false;
 
-            collision.gameObject.transform.position = orangePortal.transform.position;
+                //orangePortal.transform.parent.gameObject.GetComponent<Collider2D>().enabled = false;
+                //orangePortal.transform.parent.gameObject.GetComponent<Rigidbody2D>().simulated = false;
 
-            vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
+                collision.gameObject.transform.position = orangePortal.transform.position;
 
-            collision.gameObject.GetComponent<Rigidbody2D>().velocity = newVel * vel.magnitude;
+                vel = collision.gameObject.GetComponent<Rigidbody2D>().velocity;
 
-            //print("blue: " + vel.magnitude);
-            //print( newVel.magnitude );
-            //print( (newVel * vel.magnitude).magnitude );
+                collision.gameObject.GetComponent<Rigidbody2D>().velocity = newVel * vel.magnitude;
+
+                //print("blue: " + vel.magnitude);
+                //print( newVel.magnitude );
+                //print( (newVel * vel.magnitude).magnitude );
+            }
+            
         }
-
     }
 
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        flag = true;
+        if (collision.gameObject.tag == "Player")
+        {
+            flag = true;
+            //transform.parent.gameObject.GetComponent<Rigidbody2D>().simulated = true;
+            //transform.parent.gameObject.GetComponent<Collider2D>().enabled = true;
+        }
     }
 
 }
