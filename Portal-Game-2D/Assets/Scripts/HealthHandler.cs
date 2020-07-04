@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthHandler : MonoBehaviour
@@ -38,7 +39,7 @@ public class HealthHandler : MonoBehaviour
                 if (health < 0)
                 {
                     isAlive = false;
-                    text.text = "dead :(";
+                    SceneManager.LoadScene(sceneName: "Death");
                     //print("dead");
                 }
             }

@@ -13,6 +13,11 @@ public class PortalPlacer : MonoBehaviour
     private bool flagB = true;
     private bool flagO = true;
 
+    public AudioSource aud1;
+    public AudioSource aud2;
+    public AudioSource aud3;
+    public AudioSource aud4;
+
     //public Rigidbody2D body;
 
     //RaycastHit2D cast;
@@ -70,6 +75,8 @@ public class PortalPlacer : MonoBehaviour
 
             bluePortal.transform.parent = cast.collider.gameObject.transform;
 
+            aud1.Play();
+
             if (flagB)
             StartCoroutine(blueTime());
 
@@ -102,6 +109,8 @@ public class PortalPlacer : MonoBehaviour
 
             orangePortal.transform.parent = cast.collider.gameObject.transform;
 
+            aud2.Play();
+
             if (flagO)
             StartCoroutine(orangeTime());
 
@@ -113,6 +122,7 @@ public class PortalPlacer : MonoBehaviour
         flagB = false;
         yield return new WaitForSeconds(portalDecay);
         bluePortal.SetActive(false);
+        //aud3.Play();
         flagB = true;
     }
 
@@ -121,6 +131,7 @@ public class PortalPlacer : MonoBehaviour
         flagO = false;
         yield return new WaitForSeconds(portalDecay);
         orangePortal.SetActive(false);
+        //aud4.Play();
         flagO = true;
     }
 

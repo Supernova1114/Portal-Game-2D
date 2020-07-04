@@ -11,6 +11,8 @@ public class BlockAttack : MonoBehaviour
 
     GameObject player;
 
+    public AudioSource aud1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,12 @@ public class BlockAttack : MonoBehaviour
             }
 
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ( collision.gameObject.tag == "wall" )
+        aud1.Play();
     }
 
 
