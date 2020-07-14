@@ -15,6 +15,7 @@ public class HealthHandler : MonoBehaviour
     public Rigidbody2D body;
 
     public Text text2;
+    public Text text3;
 
     private bool flag = true;
 
@@ -67,12 +68,14 @@ public class HealthHandler : MonoBehaviour
                
                 count--;
                 text2.text = count.ToString();
+                text3.text = "Keep Moving!";
                 yield return new WaitForSeconds(1f);
             }
             else
             {
-                text2.text = "";
                 count = 4;
+                text2.text = "";
+                text3.text = "";
             }
 
             if (count == 0)
