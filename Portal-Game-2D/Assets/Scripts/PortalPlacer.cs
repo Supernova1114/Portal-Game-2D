@@ -48,6 +48,8 @@ public class PortalPlacer : MonoBehaviour
 
     }
 
+
+    //places blue portal using a raycast to check pos, and angle of normal.
     void PlaceBlue()
     {
         RaycastHit2D cast;
@@ -83,6 +85,8 @@ public class PortalPlacer : MonoBehaviour
         }
     }
 
+
+    //places orange portal using a raycast to check pos, and angle of normal.
     void PlaceOrange()
     {
         RaycastHit2D cast;
@@ -117,6 +121,8 @@ public class PortalPlacer : MonoBehaviour
         }
     }
 
+
+    //These 2 Coroutines handle portal decay.
     IEnumerator blueTime()
     {
         flagB = false;

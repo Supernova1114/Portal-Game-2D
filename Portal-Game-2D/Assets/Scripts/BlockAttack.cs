@@ -20,13 +20,9 @@ public class BlockAttack : MonoBehaviour
         StartCoroutine(StartFollow());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 
+    //Makes obj follow player
     IEnumerator StartFollow()
     {
         while (run)

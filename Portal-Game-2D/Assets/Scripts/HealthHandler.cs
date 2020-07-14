@@ -28,12 +28,9 @@ public class HealthHandler : MonoBehaviour
         StartCoroutine(VelChecker());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 
+    //handles health reduction when touching enemy
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (isAlive)
@@ -55,6 +52,8 @@ public class HealthHandler : MonoBehaviour
         }
     }
 
+
+    //Checks velocity and then counts down.
     IEnumerator VelChecker()
     {
 
@@ -88,6 +87,12 @@ public class HealthHandler : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         health = 0;
         
+    }
+
+
+    private void OnBecameInvisible()
+    {
+        health = 0;
     }
 
 

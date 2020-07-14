@@ -45,3 +45,30 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Light 1
+    uniqueID: 2796678983
+    locked: 0
+  - name: Light 2
+    uniqueID: 2360926325
+    locked: 0
+  - name: Light 3
+    uniqueID: 3724834753
+    locked: 0
+  - name: Light 4
+    uniqueID: 328302439
+    locked: 0
+  - name: Companion
+    uniqueID: 65940903
+    locked: 0
+  - name: PortalO
+    uniqueID: 131957373
+    locked: 0
+  - name: PortalB
+    uniqueID: 3826026495
+    locked: 0
+  - name: Wall
+    uniqueID: 47067307
+    locked: 0
+  - name: mouseSprite
+    uniqueID: 3777446247
+    locked: 0

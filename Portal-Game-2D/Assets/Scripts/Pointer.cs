@@ -17,7 +17,7 @@ public class Pointer : MonoBehaviour
         cam = Camera.main;
     }
 
-    // Update is called once per frame
+    //Rotates the object based on mouse pos
     void Update()
     {
         point = cam.ScreenToWorldPoint(Input.mousePosition);

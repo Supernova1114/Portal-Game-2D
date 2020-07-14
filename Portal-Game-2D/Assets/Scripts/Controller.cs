@@ -41,6 +41,10 @@ public class Controller : MonoBehaviour
 
     float temp;
     float velX;
+
+
+
+    //Moves player. Has a max velocity
     void Move(float h, float v)
     {
 
@@ -81,14 +85,15 @@ public class Controller : MonoBehaviour
             body.AddForce(new Vector2(0, -vForce * Time.deltaTime));
         }
 
+        /*//makes the player jump
         if (onWall)
         {
             body.AddForce(new Vector2(0, normVForce * Time.deltaTime));
-        }
+        }*/
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "wall")
         {
@@ -102,5 +107,5 @@ public class Controller : MonoBehaviour
         {
             onWall = false;
         }
-    }
+    }*/
 }
