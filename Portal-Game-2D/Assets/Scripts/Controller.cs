@@ -13,7 +13,7 @@ public class Controller : MonoBehaviour
     public float maxSpeed;
     public float normVForce;
 
-    private bool onWall = false;
+    //private bool onWall = false;
     //private bool jump = false;
 
     public Rigidbody2D body;
@@ -68,7 +68,7 @@ public class Controller : MonoBehaviour
                 velX = 1;
             }
 
-            body.velocity = new Vector2( velX*maxSpeed, body.velocity.y );
+            body.velocity = new Vector2( velX * maxSpeed, body.velocity.y );
         }
 
 
@@ -77,7 +77,7 @@ public class Controller : MonoBehaviour
 
         if (v == 1)
         {
-            body.AddForce(new Vector2(0, vForce*Time.deltaTime));
+            body.AddForce(new Vector2(0, vForce * Time.deltaTime));
         }
 
         if (v == -1)
