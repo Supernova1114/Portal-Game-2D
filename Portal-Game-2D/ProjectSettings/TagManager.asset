@@ -72,3 +72,6 @@ TagManager:
   - name: mouseSprite
     uniqueID: 3777446247
     locked: 0
+  - name: UI
+    uniqueID: 849133381
+    locked: 0
