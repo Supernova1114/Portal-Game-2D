@@ -1,2 +1,3 @@
 # Portal-Game-2D
-### A mini game jam with friends to make a portal game in 2D
+### Made a little portal game in 2D
+https://imgur.com/a/O7EyXwl
